@@ -1,0 +1,166 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const currentPath = Astro.url.pathname;
+const year = new Date().getFullYear();
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Visit' },
+  { href: '/donate', label: 'Donate' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-parchment text-charcoal font-body text-lg leading-relaxed min-h-screen flex flex-col">
+    <header class="border-b-2 border-tan bg-parchment/95 sticky top-0 z-50">
+      <div class="max-w-content mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="font-display text-xl md:text-2xl font-bold text-charcoal hover:text-terracotta transition-colors">
+          Snowflake Heritage Foundation
+        </a>
+        <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'font-label text-xs tracking-[0.2em] uppercase transition-colors',
+                currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                  ? 'text-terracotta'
+                  : 'text-charcoal hover:text-terracotta',
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden flex flex-col gap-1.5 p-2"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <span class="block w-6 h-0.5 bg-charcoal transition-transform" id="bar1"></span>
+          <span class="block w-6 h-0.5 bg-charcoal transition-opacity" id="bar2"></span>
+          <span class="block w-6 h-0.5 bg-charcoal transition-transform" id="bar3"></span>
+        </button>
+      </div>
+      <nav
+        id="mobile-menu"
+        class="md:hidden hidden border-t border-tan"
+        aria-label="Mobile navigation"
+      >
+        <div class="max-w-content mx-auto px-6 py-4 flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'font-label text-sm tracking-[0.2em] uppercase',
+                currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href))
+                  ? 'text-terracotta'
+                  : 'text-charcoal hover:text-terracotta',
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+    </header>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="bg-dark text-tan/80 border-t-4 border-terracotta">
+      <div class="max-w-content mx-auto px-6 py-10 text-center font-body text-sm">
+        <p class="mb-3">
+          &copy; {year} Snowflake Heritage Foundation
+        </p>
+        <p class="mb-4">
+          102 N. 1st East &middot; Snowflake, AZ 85937 &middot; (928) 536-4881
+        </p>
+        <nav class="mb-4 flex justify-center gap-4 font-label text-xs tracking-[0.15em] uppercase" aria-label="Footer navigation">
+          {navLinks.map((link) => (
+            <a href={link.href} class="hover:text-parchment transition-colors">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        <p>
+          Donate via Venmo:
+          <a
+            href="https://venmo.com/u/SnowflakeHeritageFoundation"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gold hover:text-parchment transition-colors"
+          >
+            @SnowflakeHeritageFoundation
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      const bar1 = document.getElementById('bar1');
+      const bar2 = document.getElementById('bar2');
+      const bar3 = document.getElementById('bar3');
+
+      btn?.addEventListener('click', () => {
+        const isOpen = menu?.classList.toggle('hidden') === false;
+        btn.setAttribute('aria-expanded', String(isOpen));
+        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        bar1?.classList.toggle('translate-y-[4px]', isOpen);
+        bar1?.classList.toggle('rotate-45', isOpen);
+        bar2?.classList.toggle('opacity-0', isOpen);
+        bar3?.classList.toggle('-translate-y-[4px]', isOpen);
+        bar3?.classList.toggle('-rotate-45', isOpen);
+      });
+    </script>
+
+    <style is:global>
+      body {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      }
+
+      .img-placeholder {
+        background-color: #F5F0E8;
+        border: 2px dashed #C9B99A;
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-style: italic;
+        color: #9A7B3A;
+        font-family: 'EB Garamond', serif;
+        font-size: 1rem;
+      }
+
+      .ornamental-rule {
+        border: none;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #C9B99A, transparent);
+        margin: 2.5rem 0;
+      }
+    </style>
+  </body>
+</html>

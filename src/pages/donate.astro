@@ -1,0 +1,100 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Donate — Snowflake Heritage Foundation"
+  description="Support the Snowflake Heritage Foundation with a donation via Venmo. Your generosity keeps the Stinson Museum open and history alive."
+>
+  <article class="max-w-content mx-auto px-6 py-12">
+    <h1 class="font-display text-3xl md:text-4xl font-bold mb-8">
+      Support the Snowflake Heritage Foundation
+    </h1>
+
+    <!-- Intro -->
+    <section class="mb-10">
+      <p>
+        Your generosity keeps history alive. The Snowflake Heritage Foundation
+        is a volunteer-driven nonprofit. Donations fund building maintenance,
+        artifact preservation, educational programming, and keeping our museum
+        doors open to the public.
+      </p>
+    </section>
+
+    <hr class="ornamental-rule" />
+
+    <!-- Venmo Section -->
+    <section class="mb-10">
+      <h2
+        class="font-label text-xs tracking-[0.2em] uppercase text-terracotta mb-6"
+      >
+        How to Donate
+      </h2>
+      <p class="mb-4">
+        We accept donations through Venmo&nbsp;&mdash; it&rsquo;s fast, free,
+        and works from your phone or computer.
+      </p>
+      <p class="mb-6">
+        Venmo handle: <strong class="text-terracotta"
+          >@SnowflakeHeritageFoundation</strong
+        >
+      </p>
+
+      <div class="text-center mb-8">
+        <a
+          href="https://venmo.com/u/SnowflakeHeritageFoundation"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block font-label text-sm tracking-[0.15em] uppercase px-10 py-4 bg-terracotta text-parchment border-b-4 border-terracotta/70 hover:bg-terracotta/90 transition-colors"
+        >
+          Donate on Venmo
+        </a>
+        <p class="text-sm text-charcoal/60 mt-3">
+          On mobile this will open the Venmo app directly. On desktop it will
+          open venmo.com in a new tab.
+        </p>
+      </div>
+
+      <!-- QR Code -->
+      <div class="max-w-xs mx-auto">
+        <!-- TODO: Insert actual Venmo QR code image. A printable version is available at https://venmo.com/u/SnowflakeHeritageFoundation -->
+        <img
+          src="/images/venmo-qr.png"
+          alt="Venmo QR Code — @SnowflakeHeritageFoundation"
+          class="w-full"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+        />
+      </div>
+    </section>
+
+    <hr class="ornamental-rule" />
+
+    <!-- Other ways to help -->
+    <section>
+      <h2 class="font-display text-2xl md:text-3xl font-bold mb-6">
+        Other Ways to Help
+      </h2>
+      <ul class="list-disc list-inside space-y-2 pl-4 mb-6">
+        <li>Volunteer as a museum docent or tour guide</li>
+        <li>
+          Donate artifacts, photographs, or documents related to Snowflake
+          history
+        </li>
+        <li>
+          Spread the word&nbsp;&mdash; share our site and invite visitors to the
+          museum
+        </li>
+      </ul>
+      <p>
+        For questions, call us at <a
+          href="tel:9285364881"
+          class="text-terracotta hover:underline">(928) 536-4881</a
+        > or reach out through our <a
+          href="/contact"
+          class="text-terracotta hover:underline">contact page</a
+        >.
+      </p>
+    </section>
+  </article>
+</Layout>

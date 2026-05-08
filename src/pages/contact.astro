@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Visit Us — Snowflake Heritage Foundation"
+  description="Plan your visit to the Stinson Museum in Snowflake, Arizona. Find hours, address, phone, and directions."
+>
+  <article class="max-w-content mx-auto px-6 py-12">
+    <h1 class="font-display text-3xl md:text-4xl font-bold mb-8">Visit the Stinson Museum</h1>
+
+    <!-- Info Block -->
+    <section class="mb-10">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h2 class="font-label text-xs tracking-[0.2em] uppercase text-terracotta mb-3">Address</h2>
+          <p class="mb-6">
+            102 N. 1st East (corner of 1st East &amp; 1st North)<br />
+            Snowflake, AZ 85937
+          </p>
+
+          <h2 class="font-label text-xs tracking-[0.2em] uppercase text-terracotta mb-3">Phone</h2>
+          <p class="mb-6">
+            <a href="tel:9285364881" class="text-terracotta hover:underline">(928) 536-4881</a>
+          </p>
+        </div>
+        <div>
+          <h2 class="font-label text-xs tracking-[0.2em] uppercase text-terracotta mb-3">Hours</h2>
+          <p class="mb-1">Monday &ndash; Saturday: 10:00 AM &ndash; 2:00 PM</p>
+          <p class="mb-6">Closed Sunday</p>
+
+          <h2 class="font-label text-xs tracking-[0.2em] uppercase text-terracotta mb-3">Tours by Appointment</h2>
+          <p>
+            <a href="tel:9285364331" class="text-terracotta hover:underline">(928) 536-4331</a> (Chamber of Commerce)<br />
+            Allow 1&frac12; to 2 hours for a full home tour.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ornamental-rule" />
+
+    <!-- Map -->
+    <section class="mb-10">
+      <h2 class="font-display text-2xl md:text-3xl font-bold mb-6">Find Us</h2>
+      <!-- Google Maps embed for Stinson Museum, 102 N 1st St E, Snowflake AZ -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3294.0!2d-110.0833!3d34.5133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872f3c44569af243%3A0x58c790189a51c526!2sStinson%20Pioneer%20Museum!5e0!3m2!1sen!2sus!4v1"
+        width="100%"
+        height="400"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Stinson Museum location map"
+        class="border-2 border-tan"
+      ></iframe>
+    </section>
+
+    <!-- Getting Here -->
+    <section>
+      <h2 class="font-display text-2xl md:text-3xl font-bold mb-4">Getting Here</h2>
+      <p>
+        The Stinson Museum is located in downtown Snowflake, Arizona, approximately 1 hour south of Show Low and 3 hours northeast of Phoenix.
+      </p>
+    </section>
+  </article>
+</Layout>
