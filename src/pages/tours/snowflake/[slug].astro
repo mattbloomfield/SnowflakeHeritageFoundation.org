@@ -1,0 +1,99 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import AudioPlayer from '../../../components/AudioPlayer.astro';
+import TourNav from '../../../components/TourNav.astro';
+import { snowflakeTour, getStopContext } from '../../../data/tours';
+
+export function getStaticPaths() {
+  return snowflakeTour.stops.map((stop) => ({
+    params: { slug: stop.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const ctx = getStopContext(snowflakeTour, slug!);
+if (!ctx) throw new Error(`Stop not found: ${slug}`);
+
+const { stop, index, total, prev, next } = ctx;
+---
+
+<Layout
+  title={`${stop.name} — ${snowflakeTour.name}`}
+  description={stop.description[0]}
+>
+  <article class="max-w-content mx-auto px-6 py-12">
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex flex-wrap gap-2 font-label text-xs tracking-[0.15em] uppercase text-charcoal/60">
+        <li><a href="/tours" class="hover:text-terracotta transition-colors">Tours</a></li>
+        <li class="flex items-center gap-2">
+          <span aria-hidden="true">/</span>
+          <a href={`/tours/${snowflakeTour.slug}`} class="hover:text-terracotta transition-colors">{snowflakeTour.city}</a>
+        </li>
+        <li class="flex items-center gap-2">
+          <span aria-hidden="true">/</span>
+          <span class="text-charcoal">{stop.name}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <p class="font-label text-xs tracking-[0.2em] uppercase text-terracotta mb-2">
+      Stop {index + 1} of {total}
+    </p>
+
+    <h1 class="font-display text-3xl md:text-4xl font-bold mb-2">
+      {stop.name}
+    </h1>
+
+    {(stop.yearBuilt || stop.style || stop.address) && (
+      <p class="text-charcoal/60 mb-8">
+        {[stop.yearBuilt, stop.style, stop.address].filter(Boolean).join(' \u00B7 ')}
+      </p>
+    )}
+
+    {!(stop.yearBuilt || stop.style || stop.address) && (
+      <div class="mb-8"></div>
+    )}
+
+    <!-- Image -->
+    <div class="mb-8">
+      {stop.hasImage ? (
+        <img
+          src={stop.imagePath}
+          alt={stop.imageAlt}
+          class="w-full border-2 border-tan"
+          style="filter: sepia(15%) contrast(1.05);"
+          loading="lazy"
+        />
+      ) : (
+        <div class="img-placeholder" role="img" aria-label={stop.imageAlt}>
+          <span>{stop.imageAlt}</span>
+        </div>
+      )}
+    </div>
+
+    <!-- Audio -->
+    <div class="mb-8">
+      <AudioPlayer
+        src={stop.audioPath}
+        label={stop.audioLabel}
+        hasAudio={stop.hasAudio}
+      />
+    </div>
+
+    <hr class="ornamental-rule" />
+
+    <!-- Description -->
+    <div>
+      {stop.description.map((para) => (
+        <p class="mb-4">{para}</p>
+      ))}
+    </div>
+
+    <TourNav
+      tourSlug={snowflakeTour.slug}
+      tourName={snowflakeTour.name}
+      prevStop={prev ? { slug: prev.slug, name: prev.name } : null}
+      nextStop={next ? { slug: next.slug, name: next.name } : null}
+    />
+  </article>
+</Layout>

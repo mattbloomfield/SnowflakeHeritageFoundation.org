@@ -1,0 +1,43 @@
+---
+interface Props {
+  tourSlug: string;
+  tourName: string;
+  prevStop?: { slug: string; name: string } | null;
+  nextStop?: { slug: string; name: string } | null;
+}
+
+const { tourSlug, tourName, prevStop, nextStop } = Astro.props;
+---
+
+<nav aria-label="Tour navigation" class="border-t-2 border-tan pt-6 mt-10">
+  <div class="flex justify-between items-start gap-4 mb-6">
+    {prevStop ? (
+      <a
+        href={`/tours/${tourSlug}/${prevStop.slug}`}
+        class="text-terracotta hover:underline font-body"
+      >
+        &larr; {prevStop.name}
+      </a>
+    ) : (
+      <span></span>
+    )}
+    {nextStop ? (
+      <a
+        href={`/tours/${tourSlug}/${nextStop.slug}`}
+        class="text-terracotta hover:underline font-body text-right"
+      >
+        {nextStop.name} &rarr;
+      </a>
+    ) : (
+      <span></span>
+    )}
+  </div>
+  <div class="text-center">
+    <a
+      href={`/tours/${tourSlug}`}
+      class="font-label text-xs tracking-[0.15em] uppercase text-charcoal/70 hover:text-terracotta transition-colors"
+    >
+      Back to {tourName}
+    </a>
+  </div>
+</nav>

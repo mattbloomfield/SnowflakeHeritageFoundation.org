@@ -1,0 +1,28 @@
+---
+interface Props {
+  src: string;
+  label: string;
+  hasAudio?: boolean;
+}
+
+const { src, label, hasAudio = false } = Astro.props;
+---
+
+<div class="border-2 border-tan px-6 py-4">
+  <p class="font-label text-xs tracking-[0.2em] uppercase text-terracotta mb-3">
+    Audio Narration
+  </p>
+  {hasAudio ? (
+    <>
+      <audio controls preload="none" class="w-full">
+        <source src={src} type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <p class="text-sm text-charcoal/60 mt-2">{label}</p>
+    </>
+  ) : (
+    <p class="text-charcoal/60 italic">
+      Audio narration for this stop is coming soon.
+    </p>
+  )}
+</div>

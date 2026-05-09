@@ -1,0 +1,33 @@
+---
+interface Props {
+  stopNumber: number;
+  name: string;
+  slug: string;
+  tourSlug: string;
+  yearBuilt?: string;
+  style?: string;
+}
+
+const { stopNumber, name, slug, tourSlug, yearBuilt, style } = Astro.props;
+---
+
+<a
+  href={`/tours/${tourSlug}/${slug}`}
+  class="block border-2 border-tan px-6 py-4 hover:border-terracotta transition-colors group"
+>
+  <div class="flex items-baseline gap-4">
+    <span class="font-label text-xs tracking-[0.2em] text-terracotta">
+      {String(stopNumber).padStart(2, '0')}
+    </span>
+    <div>
+      <h3 class="font-display text-xl font-bold group-hover:text-terracotta transition-colors">
+        {name}
+      </h3>
+      {(yearBuilt || style) && (
+        <p class="text-sm text-charcoal/60 mt-1">
+          {[yearBuilt, style].filter(Boolean).join(' \u00B7 ')}
+        </p>
+      )}
+    </div>
+  </div>
+</a>

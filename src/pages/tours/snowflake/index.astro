@@ -1,0 +1,68 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import StopCard from '../../../components/StopCard.astro';
+import AudioPlayer from '../../../components/AudioPlayer.astro';
+import { snowflakeTour } from '../../../data/tours';
+
+const tour = snowflakeTour;
+---
+
+<Layout
+  title={`${tour.name} — Snowflake Heritage Foundation`}
+  description={tour.summary}
+>
+  <article class="max-w-content mx-auto px-6 py-12">
+    <nav aria-label="Breadcrumb" class="mb-8">
+      <ol class="flex flex-wrap gap-2 font-label text-xs tracking-[0.15em] uppercase text-charcoal/60">
+        <li><a href="/tours" class="hover:text-terracotta transition-colors">Tours</a></li>
+        <li class="flex items-center gap-2">
+          <span aria-hidden="true">/</span>
+          <span class="text-charcoal">{tour.city}</span>
+        </li>
+      </ol>
+    </nav>
+
+    <h1 class="font-display text-3xl md:text-4xl font-bold mb-4">
+      {tour.name}
+    </h1>
+    <p class="mb-4 text-charcoal/80">{tour.summary}</p>
+    <p class="mb-2 text-charcoal/70">
+      <strong>Starting point:</strong> {tour.startingPoint}
+    </p>
+    <p class="mb-10 text-charcoal/70">
+      <strong>Duration:</strong> {tour.duration}
+    </p>
+
+    <!-- Tour introduction audio -->
+    <div class="mb-10">
+      <AudioPlayer
+        src="/audio/tours/snowflake/snowflake-intro.mp3"
+        label="Introduction to the Snowflake Heritage Tour"
+        hasAudio={true}
+      />
+    </div>
+
+    <!-- Tour route map -->
+    <img
+      src="/images/tours/snowflake/tour-map.jpg"
+      alt="Snowflake heritage tour route map"
+      class="w-full border-2 border-tan mb-10"
+      style="filter: sepia(15%) contrast(1.05);"
+      loading="lazy"
+    />
+
+    <h2 class="font-display text-2xl font-bold mb-6">Tour Stops</h2>
+    <div class="space-y-4">
+      {tour.stops.map((stop, i) => (
+        <StopCard
+          stopNumber={i + 1}
+          name={stop.name}
+          slug={stop.slug}
+          tourSlug={tour.slug}
+          yearBuilt={stop.yearBuilt}
+          style={stop.style}
+        />
+      ))}
+    </div>
+  </article>
+</Layout>

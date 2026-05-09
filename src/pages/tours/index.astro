@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { allTours } from '../../data/tours';
+---
+
+<Layout
+  title="Walking Tours — Snowflake Heritage Foundation"
+  description="Explore self-guided walking tours of historic homes in Snowflake and Taylor, Arizona. Audio narration available at each stop."
+>
+  <article class="max-w-content mx-auto px-6 py-12">
+    <h1 class="font-display text-3xl md:text-4xl font-bold mb-4">
+      Heritage Walking Tours
+    </h1>
+    <p class="mb-10 text-charcoal/80">
+      Explore the pioneer history of Snowflake and Taylor through self-guided
+      walking tours. Each tour departs from a central starting point and covers
+      historically significant homes, churches, and landmarks. Listen to audio
+      narration at each stop as you walk.
+    </p>
+
+    <div class="space-y-6">
+      {allTours.map((tour) => (
+        <a
+          href={`/tours/${tour.slug}`}
+          class="block border-2 border-tan px-8 py-6 hover:border-terracotta transition-colors group"
+        >
+          <h2 class="font-display text-2xl font-bold mb-2 group-hover:text-terracotta transition-colors">
+            {tour.name}
+          </h2>
+          <p class="text-charcoal/70 mb-3">{tour.summary}</p>
+          <p class="font-label text-xs tracking-[0.15em] uppercase text-terracotta">
+            {tour.stops.length} stops &middot; {tour.duration}
+          </p>
+        </a>
+      ))}
+    </div>
+
+    <hr class="ornamental-rule" />
+
+    <section>
+      <h2 class="font-display text-2xl font-bold mb-4">Before You Go</h2>
+      <ul class="list-disc list-inside space-y-2 pl-4 text-charcoal/80">
+        <li>Wear comfortable walking shoes and bring water.</li>
+        <li>Tours are self-guided — go at your own pace.</li>
+        <li>Please respect private property. Many tour homes are still occupied.</li>
+        <li>
+          Group tours are available by appointment — call the Chamber of Commerce
+          at <a href="tel:9285364331" class="text-terracotta hover:underline">(928) 536-4331</a>.
+        </li>
+      </ul>
+    </section>
+  </article>
+</Layout>
